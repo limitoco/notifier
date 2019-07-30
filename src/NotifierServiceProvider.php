@@ -26,8 +26,8 @@ class NotifierServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config' => config_path('limito-notifier'),
-        ]);
+            __DIR__ . '/config/notifier.php' => config_path('notifier.php'),
+        ],'config');
 
     }
 }
