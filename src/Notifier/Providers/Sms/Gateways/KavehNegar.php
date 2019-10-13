@@ -37,7 +37,12 @@ class KavehNegar extends Gateway implements iGateway
             $api = new KavenegarApi($this->getPassword() );
             $sender = $this->getFrom();
             $message = $this->body;
-            $receptor = array($this->to);
+            if(is_array($this->to)){
+                $receptor = $this->to;
+            }else{
+              $receptor = array($this->to);
+            }
+            
 
             $result = $api->Send($sender,$receptor,$message);
             if($result){
