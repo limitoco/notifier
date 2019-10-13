@@ -47,7 +47,7 @@ class KavehNegar extends Gateway implements iGateway
             $result = $api->Send($sender,$receptor,$message);
             if($result){
                 foreach($result as $r){
-                    Log::info("Notifier====>SMS====>KavehNegar====>SendResponse = " . $r->messageid . " ====>To = " . $this->to . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
+                    Log::info("Notifier====>SMS====>KavehNegar====>SendResponse = " . $r->messageid . " ====>To = " . json_encode($this->to) . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
 
                 }
             }
@@ -55,12 +55,12 @@ class KavehNegar extends Gateway implements iGateway
         catch(\Kavenegar\Exceptions\ApiException $e){
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             //echo $e->errorMessage();
-            Log::error("Notifier====>SMS====>KavehNegar====>SendResponse = " . $e->getMessage() . " ====>To = " . $this->to . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
+            Log::error("Notifier====>SMS====>KavehNegar====>SendResponse = " . $e->getMessage() . " ====>To = " . json_encode($this->to)  . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
         }
         catch(\Kavenegar\Exceptions\HttpException $e){
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
             //echo $e->errorMessage();
-            Log::error("Notifier====>SMS====>KavehNegar====>SendResponse = " . $e->getMessage() . " ====>To = " . $this->to . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
+            Log::error("Notifier====>SMS====>KavehNegar====>SendResponse = " . $e->getMessage() . " ====>To = " . json_encode($this->to)  . " ====>From = " . $this->getFrom() . ' ====>Body = ' . $this->body);
         }
 
 
