@@ -17,7 +17,7 @@ class Otp extends Provider implements iNotifier, iProvider
 {
 
     public $code;
-    private $temaplte = 'NoonResonVerification';
+    private $template = 'verify';
 
     function to($to)
     {
@@ -37,6 +37,10 @@ class Otp extends Provider implements iNotifier, iProvider
         return $this;
     }
 
+    function template($template)
+    {
+        $this->template = $template;
+    }
 
     function selectGateway()
     {
@@ -55,8 +59,7 @@ class Otp extends Provider implements iNotifier, iProvider
         $gateway = new $this->gatewayClassName();
         $gateway->to = $this->to;
         $gateway->token = $this->code;
-        $gateway->template = $this->temaplte;
-
+        $gateway->template = $this->template;
         $gateway->send();
     }
 
