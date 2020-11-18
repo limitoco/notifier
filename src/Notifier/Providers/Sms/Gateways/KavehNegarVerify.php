@@ -58,7 +58,8 @@ class KavehNegarVerify extends Gateway implements iGateway
         try {
             $api = new KavenegarApi($this->getPassword());
 
-            $result = $api->VerifyLookup($this->to, $this->token, $this->token, $this->token3, $this->template);
+            $result = $api->VerifyLookup($this->to, $this->token, $this->token2, $this->token3, $this->template);
+
             if ($result) {
                 foreach ($result as $r) {
                     Log::info("Notifier====>SMS====>KavehNegarVerify====>SendResponse = " . $r->messageid . " ====>To = " . $this->to . " ====>From = " . $this->token . ' ====>Body = ' . $this->template);
