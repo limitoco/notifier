@@ -16,7 +16,7 @@ use Limito\Notifier\Providers\Provider;
 class Otp extends Provider implements iNotifier, iProvider
 {
 
-    public $code;
+    public $code, $token, $token2, $token3;
     private $template = 'verify';
 
     function to($to)
@@ -34,6 +34,24 @@ class Otp extends Provider implements iNotifier, iProvider
     function code($code)
     {
         $this->code = $code;
+        return $this;
+    }
+
+    function token($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    function token2($token2)
+    {
+        $this->token2 = $token2;
+        return $this;
+    }
+
+    function token3($token3)
+    {
+        $this->token3 = $token3;
         return $this;
     }
 
@@ -58,7 +76,12 @@ class Otp extends Provider implements iNotifier, iProvider
     {
         $gateway = new $this->gatewayClassName();
         $gateway->to = $this->to;
-        $gateway->token = $this->code;
+        if (empty($this->code))
+            $gateway->token = $this->token;
+        else
+            $gateway->token = $this->code;
+        $gateway->token2 = $this->token2;
+        $gateway->token3 = $this->token3;
         $gateway->template = $this->template;
         $gateway->send();
     }
